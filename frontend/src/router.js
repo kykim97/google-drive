@@ -18,7 +18,6 @@ import VideoManager from "./components/listers/VideoCards"
 import VideoDetail from "./components/listers/VideoDetail"
 
 
-
 export default new Router({
     // mode: 'history',
     base: process.env.BASE_URL,
@@ -66,7 +65,6 @@ export default new Router({
                 name: 'VideoDetail',
                 component: VideoDetail
             },
-
 
 
 

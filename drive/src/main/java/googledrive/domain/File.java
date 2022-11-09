@@ -1,7 +1,6 @@
 package googledrive.domain;
 
 import googledrive.domain.FileUploaded;
-import googledrive.domain.FileDeleted;
 import googledrive.DriveApplication;
 import javax.persistence.*;
 import java.util.List;
@@ -61,11 +60,6 @@ public class File  {
         FileUploaded fileUploaded = new FileUploaded(this);
         fileUploaded.publishAfterCommit();
 
-
-
-        FileDeleted fileDeleted = new FileDeleted(this);
-        fileDeleted.publishAfterCommit();
-
     }
 
     public static FileRepository repository(){
@@ -76,6 +70,9 @@ public class File  {
 
 
     public void delete(){
+        FileDeleted fileDeleted = new FileDeleted(this);
+        fileDeleted.publishAfterCommit();
+
     }
 
 
