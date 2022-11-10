@@ -1,0 +1,99 @@
+package googledrive.domain;
+
+import googledrive.domain.UserNotified;
+import googledrive.NotificationApplication;
+import javax.persistence.*;
+import java.util.List;
+import lombok.Data;
+import java.util.Date;
+
+@Entity
+@Table(name="Notification_table")
+@Data
+
+public class Notification  {
+
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    
+    
+    
+    
+    
+    private Long id;
+    
+    
+    
+    
+    
+    private String userId;
+    
+    
+    
+    
+    
+    private String message;
+
+    @PostPersist
+    public void onPostPersist(){
+
+
+        UserNotified userNotified = new UserNotified(this);
+        userNotified.publishAfterCommit();
+
+    }
+
+    public static NotificationRepository repository(){
+        NotificationRepository notificationRepository = NotificationApplication.applicationContext.getBean(NotificationRepository.class);
+        return notificationRepository;
+    }
+
+
+
+
+    public static void notifyToUser(VideoProcessed videoProcessed){
+
+        /** Example 1:  new item 
+        Notification notification = new Notification();
+        repository().save(notification);
+
+        */
+
+        /** Example 2:  finding and process
+        
+        repository().findById(videoProcessed.get???()).ifPresent(notification->{
+            
+            notification // do something
+            repository().save(notification);
+
+
+         });
+        */
+
+        
+    }
+    public static void notifyToUser(FileUploaded fileUploaded){
+
+        /** Example 1:  new item 
+        Notification notification = new Notification();
+        repository().save(notification);
+
+        */
+
+        /** Example 2:  finding and process
+        
+        repository().findById(fileUploaded.get???()).ifPresent(notification->{
+            
+            notification // do something
+            repository().save(notification);
+
+
+         });
+        */
+
+        
+    }
+
+
+}

@@ -18,39 +18,38 @@ import googledrive.domain.*;
 @Service
 @Transactional
 public class PolicyHandler{
-    @Autowired IndexRepository indexRepository;
+    @Autowired NotificationRepository notificationRepository;
     
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString){}
 
-    @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='FileUploaded'")
-    public void wheneverFileUploaded_MakeIndex(@Payload FileUploaded fileUploaded){
+    @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='VideoProcessed'")
+    public void wheneverVideoProcessed_NotifyToUser(@Payload VideoProcessed videoProcessed){
 
-        FileUploaded event = fileUploaded;
-        System.out.println("\n\n##### listener MakeIndex : " + fileUploaded + "\n\n");
+        VideoProcessed event = videoProcessed;
+        System.out.println("\n\n##### listener NotifyToUser : " + videoProcessed + "\n\n");
 
 
         
 
         // Sample Logic //
-        Index.makeIndex(event);
+        Notification.notifyToUser(event);
         
 
         
 
     }
+    @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='FileUploaded'")
+    public void wheneverFileUploaded_NotifyToUser(@Payload FileUploaded fileUploaded){
 
-    @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='FileDeleted'")
-    public void wheneverFileDeleted_DeleteIndex(@Payload FileDeleted fileDeleted){
-
-        FileDeleted event = fileDeleted;
-        System.out.println("\n\n##### listener DeleteIndex : " + fileDeleted + "\n\n");
+        FileUploaded event = fileUploaded;
+        System.out.println("\n\n##### listener NotifyToUser : " + fileUploaded + "\n\n");
 
 
         
 
         // Sample Logic //
-        Index.deleteIndex(event);
+        Notification.notifyToUser(event);
         
 
         

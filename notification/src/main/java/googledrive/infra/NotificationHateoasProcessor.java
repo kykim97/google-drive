@@ -7,11 +7,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.hateoas.EntityModel;
 
 @Component
-public class FileHateoasProcessor implements RepresentationModelProcessor<EntityModel<File>>  {
+public class NotificationHateoasProcessor implements RepresentationModelProcessor<EntityModel<Notification>>  {
 
     @Override
-    public EntityModel<File> process(EntityModel<File> model) {
-        model.add(Link.of(model.getRequiredLink("self").getHref() + "/delete").withRel("delete"));
+    public EntityModel<Notification> process(EntityModel<Notification> model) {
 
         
         return model;

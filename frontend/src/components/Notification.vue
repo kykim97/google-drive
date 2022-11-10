@@ -10,18 +10,15 @@
         </template>
 
         <v-card-title v-if="value._links">
-            File # {{value._links.self.href.split("/")[value._links.self.href.split("/").length - 1]}}
+            Notification # {{value._links.self.href.split("/")[value._links.self.href.split("/").length - 1]}}
         </v-card-title >
         <v-card-title v-else>
-            File
+            Notification
         </v-card-title >
 
         <v-card-text>
-            <String label="Name" v-model="value.name" :editMode="editMode"/>
-            <Number label="Size" v-model="value.size" :editMode="editMode"/>
-            <Date label="CreatedTime" v-model="value.createdTime" :editMode="editMode"/>
-            <String label="Type" v-model="value.type" :editMode="editMode"/>
             <String label="UserId" v-model="value.userId" :editMode="editMode"/>
+            <String label="Message" v-model="value.message" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>
@@ -61,14 +58,6 @@
         </v-card-actions>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-                    v-if="!editMode"
-                    color="deep-purple lighten-2"
-                    text
-                    @click="delete"
-            >
-                Delete
-            </v-btn>
         </v-card-actions>
 
         <v-snackbar
@@ -91,7 +80,7 @@
 
 
     export default {
-        name: 'File',
+        name: 'Notification',
         components:{
         },
         props: {
@@ -143,7 +132,7 @@
 
                     if(!this.offline) {
                         if(this.isNew) {
-                            temp = await axios.post(axios.fixUrl('/files'), this.value)
+                            temp = await axios.post(axios.fixUrl('/notifications'), this.value)
                         } else {
                             temp = await axios.put(axios.fixUrl(this.value._links.self.href), this.value)
                         }
@@ -199,25 +188,6 @@
             },
             change(){
                 this.$emit('input', this.value);
-            },
-            async delete() {
-                try {
-                    if(!this.offline) {
-                        var temp = await axios.put(axios.fixUrl(this.value._links['delete'].href))
-                        for(var k in temp.data) {
-                            this.value[k]=temp.data[k];
-                        }
-                    }
-
-                    this.editMode = false;
-                } catch(e) {
-                    this.snackbar.status = true
-                    if(e.response && e.response.data.message) {
-                        this.snackbar.text = e.response.data.message
-                    } else {
-                        this.snackbar.text = e
-                    }
-                }
             },
         },
     }
