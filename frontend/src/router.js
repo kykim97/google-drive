@@ -17,9 +17,6 @@ import IndexDetail from "./components/listers/IndexDetail"
 import VideoManager from "./components/listers/VideoCards"
 import VideoDetail from "./components/listers/VideoDetail"
 
-import NotificationManager from "./components/listers/NotificationCards"
-import NotificationDetail from "./components/listers/NotificationDetail"
-
 
 export default new Router({
     // mode: 'history',
@@ -67,17 +64,6 @@ export default new Router({
                 path: '/videos/:id',
                 name: 'VideoDetail',
                 component: VideoDetail
-            },
-
-            {
-                path: '/notifications',
-                name: 'NotificationManager',
-                component: NotificationManager
-            },
-            {
-                path: '/notifications/:id',
-                name: 'NotificationDetail',
-                component: NotificationDetail
             },
 
 
