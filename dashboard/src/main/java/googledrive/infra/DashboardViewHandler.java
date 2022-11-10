@@ -81,11 +81,11 @@ public class DashboardViewHandler {
         }
     }
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenFileDeleted_then_UPDATE_3(@Payload FileDeleted fileDeleted) {
+    public void when_then_UPDATE_(@Payload  ) {
         try {
-            if (!fileDeleted.validate()) return;
+            if (!.validate()) return;
                 // view 객체 조회
-            Optional<Dashboard> dashboardOptional = dashboardRepository.findById(fileDeleted.getId());
+            Optional<Dashboard> dashboardOptional = dashboardRepository.findById(.getId());
 
             if( dashboardOptional.isPresent()) {
                  Dashboard dashboard = dashboardOptional.get();

@@ -11,7 +11,6 @@ public class FileHateoasProcessor implements RepresentationModelProcessor<Entity
 
     @Override
     public EntityModel<File> process(EntityModel<File> model) {
-        model.add(Link.of(model.getRequiredLink("self").getHref() + "/delete").withRel("delete"));
 
         
         return model;
