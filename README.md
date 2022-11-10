@@ -24,6 +24,7 @@ See the README.md files inside the each microservices directory:
 - drive
 - indexer
 - video processing
+- notification
 
 
 ## Run API Gateway (Spring Gateway)
@@ -47,6 +48,10 @@ mvn spring-boot:run
 - video processing
 ```
  http :8088/videos id="id" fileId="fileId" url="url" 
+```
+- notification
+```
+ http :8088/notifications id="id" userId="userId" message="message" 
 ```
 
 
